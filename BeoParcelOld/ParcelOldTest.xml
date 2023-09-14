@@ -3,9 +3,9 @@
 		<listeners>
 			<listener class-name="utilities.ExtenetReport" />
 		</listeners>		
-		<parameter name="browser" value="fireFox"></parameter>
+		<parameter name="browser" value="chrome"></parameter>
 		<classes>			
-			<class name="testCase.LogInPageTest"></class>					
+			<class name="testCase.CreatShipmentOrderPageTest"></class>					
 		</classes>
 	</test>		
 </suite>

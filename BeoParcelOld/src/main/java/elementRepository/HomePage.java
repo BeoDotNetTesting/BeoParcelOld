@@ -7,11 +7,11 @@ import org.openqa.selenium.support.PageFactory;
 
 import utilities.GeneralUtilities;
 
-public class ShipmentOverviewOrCreatPage {
+public class HomePage {
 	WebDriver driver;
 	GeneralUtilities gu = new GeneralUtilities();
 
-	public ShipmentOverviewOrCreatPage(WebDriver driver) {
+	public HomePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
@@ -22,7 +22,16 @@ public class ShipmentOverviewOrCreatPage {
 	WebElement settingsButton;
 	@FindBy(id = "mnuUsers")
 	WebElement userInSettingsDrop;
-
+	@FindBy(id="1")
+	WebElement shippingDrop;
+	@FindBy(id="mnuShipmentOverview")
+	WebElement shipmentOverviewInShippingDrop;
+	@FindBy(id="content_lblShipmentOverview")
+	WebElement shipmentOverviewHeading;
+	@FindBy(id="mnuCreateOrder")
+	WebElement createShipmentInShippingDrop;
+	
+	
 	public void changeLanguageAsEnglish() {
 		englishLanguage.click();
 	}
@@ -34,4 +43,16 @@ public class ShipmentOverviewOrCreatPage {
 	public void selectUserFromSettingsDrop() {
 		userInSettingsDrop.click();
 	}
+	public void clickOnShippingDrop() {
+		shippingDrop.click();
+		}
+	public void clickOnShipmentOverviewInShippingDrop() {
+		shipmentOverviewInShippingDrop.click();
+	}
+	public String getShipmentOverviewHeading() {
+		return shipmentOverviewHeading.getText();
+	}
+	public void clickOnCreateShipmentInShippingDrop() {
+		createShipmentInShippingDrop.click();	}
+	
 }
