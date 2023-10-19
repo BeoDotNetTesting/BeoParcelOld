@@ -19,7 +19,7 @@ public class UserSettingsPageTest extends BaseClass {
 	ForgotPasswordPage fpp;
 
 	@Test
-	public void f() throws InterruptedException {
+	public void userCreation_TC56579() throws InterruptedException {
 		lp = new LogInPage(driver);
 		usp = new UserSettingsPage(driver);
 		hp = new HomePage(driver);

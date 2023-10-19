@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -17,6 +16,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utilities.ScreenShotCapture;
+
 
 public class BaseClass {
 	WebDriver driver;
@@ -54,11 +54,11 @@ public class BaseClass {
 	}
 
 	@AfterMethod(alwaysRun = true)
-	public void afterMethod(ITestResult iTestResult) throws IOException {
+	public void afterMethode(ITestResult iTestResult) throws IOException {
 		if (iTestResult.getStatus() == ITestResult.FAILURE) {
 			sc = new ScreenShotCapture();
 			sc.captureFailureScreenShot(driver, iTestResult.getName());
-		}
-		driver.close();
+		}		
+		driver.quit();
 	}
 }

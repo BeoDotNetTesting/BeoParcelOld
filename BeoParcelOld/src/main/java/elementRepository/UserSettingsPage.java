@@ -31,7 +31,7 @@ public class UserSettingsPage {
 	WebElement sprintGmbhCompany;
 	@FindBy(id="content_ddlNationality")
 	WebElement dropCountry;
-	@FindBy(xpath="//select[@id='content_ddlNationality']//option[text()='Deutschland']")
+	@FindBy(xpath="//select[@id='content_ddlNationality']//option[text()='Germany']")
 	WebElement countryDeutschland;
 	@FindBy(id="content_txtStreet")
 	WebElement streetNameField;

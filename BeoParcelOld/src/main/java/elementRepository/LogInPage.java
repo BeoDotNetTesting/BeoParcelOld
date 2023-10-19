@@ -30,5 +30,8 @@ public class LogInPage {
 		passwordField.sendKeys(password);
 		logInButton.click();		
 		}
+	public String getTitleOfParcelWeb() {
+		return driver.getTitle();
+	}
 	
 }

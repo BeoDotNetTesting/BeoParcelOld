@@ -75,7 +75,25 @@ public class ExtenetReport implements ITestListener {
 
 	public void onStart(ITestContext context) {
 		configureReport();
+		// Delete the testoutput folder before the suite starts
+        File testOutputFolder = new File("target/testoutput");
+        if (testOutputFolder.exists()) {
+            deleteFolder(testOutputFolder);
+        }
 	}
+	private void deleteFolder(File folder) {
+        File[] files = folder.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    deleteFolder(file);
+                } else {
+                    file.delete();
+                }
+            }
+        }
+        folder.delete();
+    }
 
 	public void onFinish(ITestContext context) {
 		reports.flush();

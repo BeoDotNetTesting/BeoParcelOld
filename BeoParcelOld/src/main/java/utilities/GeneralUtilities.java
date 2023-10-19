@@ -1,5 +1,8 @@
 package utilities;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
@@ -197,9 +200,17 @@ public class GeneralUtilities {
 	public String getAttributeValueOfElement(WebElement element, String attribute) {
 		return element.getAttribute(attribute);
 	}
+
 	public String generateCurrentDateAndTime() {
-		Date date = new Date();		
+		Date date = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyhhmmss");
-		return formatter.format(date);		
+		return formatter.format(date);
+	}
+
+	public void copyReport(String from, String to) throws InterruptedException, IOException {
+		File dirFrom = new File(from);
+		File dirTo = new File(to);
+		Thread.sleep(5000);
+		Files.copy(dirFrom.toPath(), dirTo.toPath());
 	}
 }
