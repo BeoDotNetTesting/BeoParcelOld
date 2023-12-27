@@ -1,15 +1,15 @@
 <suite name="BeoParcel" parallel="tests" thread-count="1">
 	<test name="ChromeTest">
 		<listeners>
-			<listener class-name="utilities.RetryListener"/>
-			<listener class-name="utilities.ExtenetReport" />			
-		</listeners>		
+			<listener class-name="utilities.RetryListener" />
+			<listener class-name="utilities.ExtenetReport" />
+		</listeners>
 		<parameter name="browser" value="chrome"></parameter>
-		<classes>			
-			<class name="testCase.LogInPageTest"></class>	
-			<class name="testCase.UserSettingsPageTest"></class>	
-			<class name="testCase.CreatShipmentOrderPageTest"></class>	
-			<class name="testCase.ShipmentOverViewPageTest"></class>				
+		<classes>
+			<class name="testCase.LogInPageTest"></class>
+			<class name="testCase.UserSettingsPageTest"></class>
+			<class name="testCase.CreatShipmentOrderPageTest"></class>
+			<class name="testCase.ShipmentOverViewPageTest"></class>
 		</classes>
-	</test>		
+	</test>
 </suite>

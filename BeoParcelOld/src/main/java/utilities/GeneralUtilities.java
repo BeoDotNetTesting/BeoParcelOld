@@ -44,11 +44,11 @@ public class GeneralUtilities {
 		return selectedElement.getText();
 	}
 
-	public String selectDropdownWithVisibleText(WebElement element, String text) {
+	public void selectDropdownWithVisibleText(WebElement element, String text) {
 		Select object = new Select(element);
 		object.selectByVisibleText(text);
 		WebElement selectedElement = object.getFirstSelectedOption();
-		return selectedElement.getText();
+		 selectedElement.click();;
 	}
 
 	public boolean elementIsSelected(WebElement element) {
@@ -115,6 +115,20 @@ public class GeneralUtilities {
 		je.executeScript("arguments[0].scrollIntoView(true);", elements.get(index));
 	}
 
+	public void sendValueUsingJavaScript(WebDriver driver,WebElement element,String value) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].value = '"+value+"'", element);
+	}
+	public void blurThePlaceHolder(WebDriver driver,WebElement element) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].blur()", element);
+	}
+	public void sendValueUsingJavaScriptAndBlur(WebDriver driver,WebElement element,String value) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].value = '"+value+"'", element);
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		js1.executeScript("arguments[0].blur()", element);
+	}
 	public String getCSSValueOfElement(WebElement element, String parameter) {
 		return element.getCssValue(parameter);
 	}
@@ -213,4 +227,24 @@ public class GeneralUtilities {
 		Thread.sleep(5000);
 		Files.copy(dirFrom.toPath(), dirTo.toPath());
 	}
+	public boolean checkAttributePresentOrNot(WebElement element,String attributeName) {
+		boolean attributeStatus=false;
+		if(element.getAttribute(attributeName) != null) {
+			attributeStatus=true;
+		}
+		return attributeStatus;
+	}
+	public boolean checkAWordPresentInScentence(String substringToCheck, String sentence) {
+		boolean status= false;
+		  if (sentence.contains(substringToCheck)) {
+	           status=true;
+	        } else {
+	        	status=false;
+	        }
+		  return status;
+	    }
+	public void scrollElementIntoView(WebDriver driver, WebElement element) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
 }

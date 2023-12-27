@@ -34,13 +34,13 @@ public class ExtenetReport implements ITestListener {
 		reports = new ExtentReports();
 		reports.attachReporter(sparkReporter);
 
-		reports.setSystemInfo("Project", "Exportkontrolle 2");
+		reports.setSystemInfo("Project", "Parcel Web");
 		reports.setSystemInfo("PC Name", "Akhil's PC");
 		reports.setSystemInfo("OS", "Windows 11");
 		reports.setSystemInfo("Test Done By", "Akhil Sathyan");		
-		sparkReporter.config().setDocumentTitle("ExportKontrolle Report ");
+		sparkReporter.config().setDocumentTitle("BEO-Parcel Report ");
 		sparkReporter.config().setReportName("Report Summary");
-		sparkReporter.config().setTheme(Theme.DARK);
+		sparkReporter.config().setTheme(Theme.STANDARD);
 	}
 
 	public void onTestStart(ITestResult result) {

@@ -15,11 +15,11 @@ public class TemporaryEmailPage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	@FindBy(xpath="//div[@id=\"__next\"]//div[3]//section[1]//div//div[2]//div[1]//div[1]//div//p")
+	@FindBy(xpath="//div[@id='__next']//section[1]//div//div[2]//div[1]//div[1]//div//p")
 	WebElement emailId;
-	@FindBy(xpath="//div[@id=\"__next\"]//div[3]//section[1]//div//div[3]//div[1]//div//div[2]//button//div//div[1]//p")
+	@FindBy(xpath="//div[@id='__next']//section[1]//div//div[3]//div[1]//div//div[2]//button//div//div[1]//p")
 	WebElement mailPopUp;
-	@FindBy(xpath="//div[@id=\"__next\"]//div[3]//section[1]//div//div[3]//div[2]//div//div//div[3]//a")
+	@FindBy(xpath="//div[@id='__next']//section[1]//div//div[3]//div[2]//div//div//div[3]//a")
 	WebElement mailLink;
 	
 	public String getTempEmailId() {
