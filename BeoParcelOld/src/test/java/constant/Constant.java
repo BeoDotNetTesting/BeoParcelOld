@@ -4,8 +4,9 @@ public class Constant {
 	//File Location
 	public static final String propertyFileLocation="\\src\\main\\resources\\Properties\\config.properties";
 	public static final String ExcelFileLocation="\\src\\main\\resources\\Excel\\ParcelTest.xls";
-	public static final String ExcelLogInSheetName="LogInPage";
+	public static final String ExcelLogInSheetName="ParcelWeb";
 	public static final String ChromeDriverFileLocation="\\src\\main\\resources\\Driver\\chromedriver.exe";
+	public static final String FireFoxDriverFileLocation="\\src\\main\\resources\\Driver\\geckodriver.exe";
 	
 	public static final String sovp_completeShipmentWithoutPrinting_TC58127 = "::company name not as expected";
 	
