@@ -1,10 +1,15 @@
 package testCase;
 
+import java.io.IOException;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import constant.Constant;
 import elementRepository.LogInPage;
 import elementRepository.ShipmentOverViewPage;
+import utilities.ExcelUtilities;
 import elementRepository.CreatShipmentOrderPage;
 import elementRepository.HomePage;
 
@@ -13,23 +18,24 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 	HomePage hp;
 	CreatShipmentOrderPage csop;
 	ShipmentOverViewPage sovp;
+	
 
 	@Test
-	public void createShipmentForDHLPaketInternational_TC51562() throws InterruptedException {
+	public void createShipmentForDHLPaketInternational_TC51562() throws InterruptedException, IOException, InvalidFormatException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
 		sovp = new ShipmentOverViewPage(driver);
-		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+	//	lp.login(ExcelUtilities.readDataFromExcelParcelRowColumn(0,3), "bincy@9847JIBIN"); //Constant.ExcelFileLocation
 		hp.changeLanguageAsEnglish();
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL PAKET");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
 		csop.fronSendOnStreetNameField("Berlin");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("12043:Berlin");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -37,7 +43,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.fromSendMobileNumber("9874561230");
 		csop.sendShipmentReferanceNumber();
 		csop.sendDeliveryNoteNumber();
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Palarivattom");
@@ -55,8 +61,8 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
 	}
 
-	@Test
-	public void createShipmentForDHLPaketNational_TC51560() throws InterruptedException {
+	@Test//(groups = "National")
+	public void createShipmentForDHLPaketNational_TC51560() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -66,11 +72,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL PAKET");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -79,7 +85,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.sendShipmentReferanceNumber();
 		csop.sendDeliveryNoteNumber();
 		csop.toSelectCountryFromDropDown("Germany");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Ensisheimerstr");
@@ -95,7 +101,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 	}
 
 	@Test
-	public void createShipmentForDHLPaketEuropeB2B_TC51561() throws InterruptedException {
+	public void createShipmentForDHLPaketEuropeB2B_TC51561() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -105,11 +111,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL PAKET");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -121,7 +127,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.sendDeliveryNoteNumber();
 		Thread.sleep(1000);
 		csop.toSelectCountryFromDropDown("Belgium");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Wavre");
@@ -140,8 +146,8 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
 	}
 
-	@Test
-	public void createShipmentForDHLPaketNational_TC51395() throws InterruptedException {
+	@Test//(groups = "National")
+	public void createShipmentForDHLPaketNational_TC51395() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -151,11 +157,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL PAKET");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -167,7 +173,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.sendDeliveryNoteNumber();
 		Thread.sleep(1000);
 		csop.toSelectCountryFromDropDown("Germany");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Ensisheimerstr");
@@ -189,7 +195,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 	}
 
 	@Test
-	public void createShipmentForDHLPaketEuropeB2B_TC51396() throws InterruptedException {
+	public void createShipmentForDHLPaketEuropeB2B_TC51396() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -199,11 +205,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL PAKET");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -212,7 +218,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.sendShipmentReferanceNumber();
 		csop.sendDeliveryNoteNumber();
 		csop.toSelectCountryFromDropDown("Belgium");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Wavre");
@@ -227,7 +233,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 	}
 
 	@Test
-	public void createShipmentForDHLPaketInternational_TC51397() throws InterruptedException {
+	public void createShipmentForDHLPaketInternational_TC51397() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -237,11 +243,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL PAKET");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Berlin");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("12043:Berlin");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -249,7 +255,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.fromSendMobileNumber("9874561230");
 		csop.sendShipmentReferanceNumber();
 		csop.sendDeliveryNoteNumber();
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Palarivattom");
@@ -269,8 +275,8 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
 	}
 
-	@Test
-	public void createShipmentForDHLPaketNationalWithTwoPackages_TC51550() throws InterruptedException {
+	@Test(groups = "National")
+	public void createShipmentForDHLPaketNationalWithTwoPackages_TC51550() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -280,11 +286,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL PAKET");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -296,7 +302,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.sendDeliveryNoteNumber();
 		Thread.sleep(1000);
 		csop.toSelectCountryFromDropDown("Germany");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Ensisheimerstr");
@@ -318,7 +324,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 	}
 
 	@Test
-	public void createShipmentForDHLPaketEuropeB2BWithTwoPackages_TC51551() throws InterruptedException {
+	public void createShipmentForDHLPaketEuropeB2BWithTwoPackages_TC51551() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -328,11 +334,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL PAKET");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -340,7 +346,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.fromSendMobileNumber("9874561230");
 		csop.sendShipmentReferanceNumber();
 		csop.toSelectCountryFromDropDown("Belgium");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Wavre");
@@ -358,7 +364,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 	}
 
 	@Test
-	public void createShipmentForDHLPaketInternationalWithTwoPackages_TC51553() throws InterruptedException {
+	public void createShipmentForDHLPaketInternationalWithTwoPackages_TC51553() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -368,18 +374,18 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL PAKET");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Berlin");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("12043:Berlin");
 		csop.fromSendLandPhoneAreaCode("0484");
 		csop.fromSendLandPhoneNumber("2445896");
 		csop.fromSendMobileNumber("9874561230");
 		csop.sendShipmentReferanceNumber();
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Palarivattom");
@@ -399,8 +405,8 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
 	}
 
-	@Test
-	public void createShipmentForDHLExpressNational_TC59107() throws InterruptedException {
+	@Test(groups = "National")
+	public void createShipmentForDHLExpressNational_TC59107() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -410,11 +416,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL Express");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -427,7 +433,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		Thread.sleep(1000);
 		csop.selectCarrierProduct("EXPRESS DOMESTIC");
 		csop.toSelectCountryFromDropDown("Germany");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Ensisheimerstr");
@@ -452,7 +458,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 	}
 
 	@Test
-	public void createShipmentForDHLExpressEuropeB2B_TC59140() throws InterruptedException {
+	public void createShipmentForDHLExpressEuropeB2B_TC59140() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -462,11 +468,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL Express");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -475,7 +481,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.sendShipmentReferanceNumber();
 		csop.sendDeliveryNoteNumber();
 		csop.toSelectCountryFromDropDown("Belgium");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Wavre");
@@ -497,8 +503,8 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
 	}
 
-	@Test(groups = "run")
-	public void createShipmentForDHLExpressInternational_TC59140() throws InterruptedException {
+	@Test
+	public void createShipmentForDHLExpressInternational_TC59140() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -508,11 +514,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DHL Express");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -521,7 +527,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.sendShipmentReferanceNumber();
 		csop.sendDeliveryNoteNumber();
 		csop.toSelectCountryFromDropDown("India");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Palarivattom");
@@ -543,8 +549,8 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
 	}
 
-	@Test
-	public void createShipmentForDPDClassicNationalOnePackageTwoStagePacking_TC59160() throws InterruptedException {
+	@Test(groups = {"National"})
+	public void createShipmentForDPDClassicNationalOnePackageTwoStagePacking_TC59160() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -554,11 +560,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DPD");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -571,7 +577,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		Thread.sleep(1000);
 		csop.selectCarrierProduct("DPD Classic");
 		csop.toSelectCountryFromDropDown("Germany");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Ensisheimerstr");
@@ -589,8 +595,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.clickOnEditPickUpButton();
 		csop.sendPickUpAddress();
 		csop.selectPickUpCountry("Germany");
-		csop.clickOnPrintButton();
-		csop.clickOnPrintButton();
+		csop.clickOnPrintButton();		
 		Thread.sleep(1000);
 		Thread.sleep(1000);
 		Thread.sleep(1000);
@@ -599,7 +604,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 	}
 
 	@Test
-	public void createShipmentForDPDExpressEuropeB2B_TC59161() throws InterruptedException {
+	public void createShipmentForDPDExpressEuropeB2B_TC59161() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -609,11 +614,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DPD");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -622,7 +627,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.sendShipmentReferanceNumber();
 		csop.sendDeliveryNoteNumber();
 		csop.toSelectCountryFromDropDown("Belgium");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Wavre");
@@ -651,7 +656,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 	}
 
 	@Test
-	public void createShipmentForDPDInternational_TC59140() throws InterruptedException {
+	public void createShipmentForDPDInternational_TC59140() throws InterruptedException, InvalidFormatException, IOException {
 		lp = new LogInPage(driver);
 		hp = new HomePage(driver);
 		csop = new CreatShipmentOrderPage(driver);
@@ -661,11 +666,11 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		hp.clickOnShippingDrop();
 		hp.clickOnCreateShipmentInShippingDrop();
 		csop.selectCarrier("DPD");
-		csop.fromSendPersonName("Mr.Jimmy Varghese");
-		csop.fromSendCompanyName("BEO Software Germany");
-		csop.fromSendOnName3Field("PJ Antony Cross road");
-		csop.fronSendOnStreetNameField("Ensisheimerstr");
-		csop.fromSendOnhouseNumberField("12345");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
 		csop.fromSelectCountryFromDropDown("Germany");
 		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
 		csop.fromSendLandPhoneAreaCode("0484");
@@ -674,7 +679,7 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		csop.sendShipmentReferanceNumber();
 		csop.sendDeliveryNoteNumber();
 		csop.toSelectCountryFromDropDown("India");
-		csop.toSendPersonName("Sanoop K M");
+		csop.toSendPersonName(parcelWebdata(16,1));
 		csop.toSendCompanyName("Beo India");
 		csop.sendToName2and3Field();
 		csop.toSendStreetName("Palarivattom");
@@ -700,5 +705,1186 @@ public class CreatShipmentOrderPageTest extends BaseClass {
 		Thread.sleep(1500);
 		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
 		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+
+	@Test
+	public void createShipmentForUPSEuropeB2B_TC59200() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("UPS");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Germany");
+		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.fromSendLandPhoneAreaCode("0484");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("9874561230");
+		csop.sendShipmentReferanceNumber();
+		csop.sendDeliveryNoteNumber();
+		csop.toSelectCountryFromDropDown("Belgium");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Wavre");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("1300:Wavre");
+		csop.sentToPhoneAreaCode("1234");
+		csop.sentToPhoneNumber("123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.selectCarrierProduct("UPS Standard");
+		csop.sendPackageMeasurements();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.clickOnMultiPackingButton(1);
+		csop.clickOnTwoStagePacking(1);
+		csop.sendTwoStagePackingDimensions(1, "5", "5", "5");
+		Thread.sleep(1000);
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry("Germany");
+		csop.clickOnInvoiceRecipientTab();
+		csop.sendInvoceRecipientDetails();
+		csop.clickOnPrintButton();
+		// csop.clickOnPrintButton();
+		Thread.sleep(1500);
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+
+	@Test
+	public void createShipmentForUPSInternational_TC59201() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("UPS");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Germany");
+		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.fromSendLandPhoneAreaCode("0484");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("9874561230");
+		csop.sendShipmentReferanceNumber();
+		csop.sendDeliveryNoteNumber();
+		csop.toSelectCountryFromDropDown("India");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Palarivattom");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("682025:Palarivattom");
+		csop.sentToPhoneAreaCode("1234");
+		csop.sentToPhoneNumber("123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.selectCarrierProduct("UPS Saver");
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry("Germany");
+		csop.clickOnInvoiceRecipientTab();
+		csop.sendInvoceRecipientDetails();
+		csop.sendPackageMeasurements();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.clickOnFurtherPackageWithDataTransfer();
+		csop.clickOnMultiPackingButton(1);
+		csop.clickOnTwoStagePacking(1);
+		csop.sendTwoStagePackingDimensions(1, "5", "5", "5");
+		Thread.sleep(1000);
+		csop.clickOnPrintButton();
+		//csop.clickOnPrintButton();
+		Thread.sleep(1500);
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+
+	@Test(groups = "National")//(groups = "run",priority=1)
+	public void createShipmentForUPSNational_TC59199() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("UPS");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Germany");
+		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.fromSendLandPhoneAreaCode("0484");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("9874561230");
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct("UPS Standard");
+		csop.toSelectCountryFromDropDown("Germany");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Ensisheimerstr");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.sentToPhoneAreaCode("1234");
+		csop.sentToPhoneNumber("123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.clickOnFurtherPackageWithDataTransfer();
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry("Germany");
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);
+		Thread.sleep(1000);
+		Thread.sleep(1000);
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+
+	@Test//fail when we dont close print tab manually
+	public void createShipmentForTNTEuropeB2B_TC59474() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("TNT1234");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Germany");
+		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.fromSendLandPhoneAreaCode("0484");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("9874561230");
+		csop.sendShipmentReferanceNumber();
+		csop.sendDeliveryNoteNumber();
+		csop.toSelectCountryFromDropDown("Belgium");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Wavre");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("1300:Wavre");
+		csop.sentToPhoneAreaCode("1234");
+		csop.sentToPhoneNumber("123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.selectCarrierProduct("Express Non Documents(15N)");
+		csop.sendPackageMeasurements();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.clickOnMultiPackingButton(1);
+		csop.sendArtikelPackageItemsCount(1);
+		csop.clickOnTwoStagePacking(1);
+		csop.sendTwoStagePackingDimensions(1, "5", "5", "5");		
+		csop.sendTwoStagePackingReferanceCode(1);
+		csop.sendTwoStagePackingItemsCount(1);		
+		Thread.sleep(1000);
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry("Germany");Thread.sleep(2000);
+		csop.sendPickUpDate();
+		csop.clickOnInvoiceRecipientTab();
+		csop.sendInvoceRecipientDetails();
+		csop.clickOnPrintButton();		
+		Thread.sleep(1500);
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = {"National"})//fail when we dont close print tab manually
+	public void createShipmentForTNTNational_TC59458() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("TNT1234");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Germany");
+		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.fromSendLandPhoneAreaCode("0484");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("9874561230");
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);		
+		csop.toSelectCountryFromDropDown("Germany");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Ensisheimerstr");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.sentToPhoneAreaCode("1234");
+		csop.sentToPhoneNumber("123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.selectCarrierProduct("Express(15N)");
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.clickOnFurtherPackageWithDataTransfer();		
+		csop.clickOnMultiPackingButton(1);
+		csop.sendArtikelPackageItemsCount(1);
+		csop.clickOnTwoStagePacking(1);
+		csop.sendTwoStagePackingDimensions(1, "5", "5", "5");		
+		csop.sendTwoStagePackingReferanceCode(1);
+		csop.sendTwoStagePackingItemsCount(1);			
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry("Germany");
+		csop.sendPickUpDate();
+		csop.sendPickUpFromTime();
+		csop.sendPickUpToTime();	
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test  // Issues
+	public void createShipmentForTNTInternational_TC59473() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("TNT1234");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Germany");
+		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.fromSendLandPhoneAreaCode("0484");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("9874561230");
+		csop.sendShipmentReferanceNumber();
+		csop.sendDeliveryNoteNumber();
+		csop.toSelectCountryFromDropDown("India");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Palarivattom");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("682025:Palarivattom");
+		csop.sentToPhoneAreaCode("1234");
+		csop.sentToPhoneNumber("123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.selectCarrierProduct("Express Non Documents(15N)");
+		
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry("Germany");
+		csop.sendPickUpDate();
+		
+		csop.clickOnInvoiceRecipientTab();
+		csop.sendInvoceRecipientDetails();
+		csop.sendPackageMeasurements();
+		csop.sendPackageItemCount(1, "3");
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.clickOnFurtherPackageWithDataTransfer();
+		csop.clickOnMultiPackingButton(1);
+		csop.clickOnTwoStagePacking(1);
+		csop.sendTwoStagePackingDimensions(1, "5", "5", "5");		
+		csop.sendTwoStagePackingReferanceCode(1);
+		csop.sendTwoStagePackingItemsCount(1);		
+		Thread.sleep(1000);
+		csop.clickOnPrintButton();		
+		Thread.sleep(1500);
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = "National")
+	public void createShipmentForDHLFreightNational_TC59679() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("DHL Freight");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Germany");
+		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.fromSendLandPhoneAreaCode("0484");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("9874561230");
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);		
+		csop.toSelectCountryFromDropDown("Germany");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Ensisheimerstr");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.sentToPhoneAreaCode("1234");
+		csop.sentToPhoneNumber("123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.selectCarrierProduct("DHL EUROCONNECT DOMESTIC(ECD)");
+		csop.sendPackageMeasurementsForDHLFreight();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendPackageItemCount(1, "2");
+		csop.clickOnFurtherPackageWithDataTransfer();
+		csop.sendTypeOfPackage(1, "PLZ");
+		csop.sendPackageDescription(1, "Package Description");
+		csop.clickOnDeliveryConditionsTab();
+		csop.selectFrankaturCarrier();
+		csop.clickOnFurtherPackageWithDataTransfer();		
+		/*csop.clickOnMultiPackingButton(1);
+		csop.sendArtikelPackageItemsCount(1);
+		csop.clickOnTwoStagePacking(1);
+		csop.sendTwoStagePackingDimensions(1, "5", "5", "5");		
+		csop.sendTwoStagePackingReferanceCode(1);
+		csop.sendTwoStagePackingItemsCount(1);			
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry("Germany");
+		csop.sendPickUpDate();*/		
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test 
+	public void createShipmentForDHLFreightEuropeB2B_TC59680() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("DHL Freight");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Germany");
+		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.fromSendLandPhoneAreaCode("0484");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("9874561230");
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);		
+		csop.toSelectCountryFromDropDown("Belgium");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Wavre");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("1300:Wavre");
+		csop.sentToPhoneAreaCode("1234");
+		csop.sentToPhoneNumber("123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.selectCarrierProduct("DHL EUROCONNECT INTERNATIONAL(ECI)");
+		csop.sendPackageMeasurementsForDHLFreight();	
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendPackageItemCount(1, "2");
+		csop.sendTypeOfPackage(1, "PLZ");
+		csop.sendPackageDescription(1, "Package Description");
+		csop.clickOnDeliveryConditionsTab();
+		csop.selectFrankaturCarrier();
+		csop.clickOnFurtherPackageWithDataTransfer();		
+		/*csop.clickOnMultiPackingButton(1);
+		csop.sendArtikelPackageItemsCount(1);
+		csop.clickOnTwoStagePacking(1);
+		csop.sendTwoStagePackingDimensions(1, "5", "5", "5");		
+		csop.sendTwoStagePackingReferanceCode(1);
+		csop.sendTwoStagePackingItemsCount(1);			
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry("Germany");
+		csop.sendPickUpDate();*/		
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test 
+	public void createShipmentForDHLFreightInternational_TC59682() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("DHL Freight");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Germany");
+		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.fromSendLandPhoneAreaCode("0484");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("9874561230");
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);		
+		csop.toSelectCountryFromDropDown("Italy");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Spinetta");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("12100:Spinetta");
+		csop.sentToPhoneAreaCode("1234");
+		csop.sentToPhoneNumber("123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.selectCarrierProduct("DHL EUROCONNECT INTERNATIONAL(ECI)");
+		csop.sendPackageMeasurementsForDHLFreight();	
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendPackageItemCount(1, "2");
+		csop.sendTypeOfPackage(1, "PLZ");
+		csop.sendPackageDescription(1, "Package Description");
+		csop.clickOnDeliveryConditionsTab();
+		csop.selectFrankaturCarrier();
+		csop.clickOnFurtherPackageWithDataTransfer();		
+		/*csop.clickOnMultiPackingButton(1);
+		csop.sendArtikelPackageItemsCount(1);
+		csop.clickOnTwoStagePacking(1);
+		csop.sendTwoStagePackingDimensions(1, "5", "5", "5");		
+		csop.sendTwoStagePackingReferanceCode(1);
+		csop.sendTwoStagePackingItemsCount(1);			
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry("Germany");
+		csop.sendPickUpDate();*/		
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = "National")
+	public void createShipmentForSwisspostNational_TC59737() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("swisspost");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField("Genève");
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Switzerland");
+		csop.fromSendPostalCode("1200:Genève");
+		csop.fromSendLandPhoneAreaCode("00423");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("1234123456789");
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);		
+		csop.toSelectCountryFromDropDown("Switzerland");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Genève");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("1201:Genève");
+		csop.sentToPhoneAreaCode("00423");
+		csop.sentToPhoneNumber("1234123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.selectCarrierProduct("PostPac Economy(ECO)");
+		csop.sendPackageMeasurements();	
+		csop.sendArtikelDescriptionByLimit(2);		
+		csop.clickOnFurtherPackageWithDataTransfer();					
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = "National")
+	public void createShipmentForGLSNational_TC59797() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("GLS");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Germany");
+		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.fromSendLandPhoneAreaCode("0484");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("9874561230");
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct("ExpressParcel");
+		csop.toSelectCountryFromDropDown("Germany");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Ensisheimerstr");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.sentToPhoneAreaCode("1234");
+		csop.sentToPhoneNumber("123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.clickOnFurtherPackageWithDataTransfer();
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry("Germany");
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = {"National"})
+	public void createShipmentForGONational_TC59798() throws InterruptedException, InvalidFormatException, IOException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login("bincy.paulose@beo.in", "bincy@9847JIBIN");
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier("GO! TIZA HQ");
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown("Germany");
+		csop.fromSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.fromSendLandPhoneAreaCode("0484");
+		csop.fromSendLandPhoneNumber("2445896");
+		csop.fromSendMobileNumber("9874561230");
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct("Overnight");
+		csop.toSelectCountryFromDropDown("Germany");
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName("Beo India");
+		csop.sendToName2and3Field();
+		csop.toSendStreetName("Ensisheimerstr");
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode("79346:Endingen am Kaiserstuhl");
+		csop.sentToPhoneAreaCode("1234");
+		csop.sentToPhoneNumber("123456789");
+		csop.sentToEmailAddressCode("bincy.paulose@beo.in");
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendOnAdditionalInfoPackageTypeContentField();
+		csop.clickOnFurtherPackageWithDataTransfer();
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry("Germany");
+	csop.sendPickUpFromTime();
+		csop.sendPickUpToTime();	
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = {"National"})
+	public void createShipmentForDBSNational_TC59799() throws InterruptedException, IOException, InvalidFormatException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login(parcelWebdata(0,2), parcelWebdata(1,2));
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier(parcelWebdata(50,1));
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown(parcelWebdata(9,1));
+		csop.fromSendPostalCode(parcelWebdata(10,1));
+		csop.fromSendLandPhoneAreaCode(parcelWebdata(11,1));
+		csop.fromSendLandPhoneNumber(parcelWebdata(12,1));
+		csop.fromSendMobileNumber(parcelWebdata(13,1));
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct(parcelWebdata(50,2));
+		csop.toSelectCountryFromDropDown(parcelWebdata(18,1));
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName(parcelWebdata(17,1));
+		csop.sendToName2and3Field();
+		csop.toSendStreetName(parcelWebdata(20,1));
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode(parcelWebdata(19,1));
+		csop.sentToPhoneAreaCode(parcelWebdata(21,1));
+		csop.sentToPhoneNumber(parcelWebdata(22,1));
+		csop.sentToEmailAddressCode(parcelWebdata(23,1));
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendTypeOfPackage(1, parcelWebdata(27,4));
+		csop.sendCargoDescription(1, parcelWebdata(28,4));
+		Thread.sleep(1000);
+		csop.clickOnFurtherPackageWithDataTransfer();	
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry(parcelWebdata(36,1));		
+		csop.sendPickUpDate();
+		Thread.sleep(1000);
+		csop.sendPickUpFromTimeDBS();
+		csop.sendPickUpToTimeDBS();		
+		csop.clickOnDeliveryConditionsTab();
+		csop.setDeliveryConditions();
+		csop.clickOnFurtherPackageWithDataTransfer();		
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = {"National"})
+	public void createShipmentForSGNational_TC59800() throws InterruptedException, IOException, InvalidFormatException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login(parcelWebdata(0,2), parcelWebdata(1,2));
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier(parcelWebdata(60,1));
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown(parcelWebdata(9,1));
+		csop.fromSendPostalCode(parcelWebdata(10,1));
+		csop.fromSendLandPhoneAreaCode(parcelWebdata(11,1));
+		csop.fromSendLandPhoneNumber(parcelWebdata(12,1));
+		csop.fromSendMobileNumber(parcelWebdata(13,1));
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct(parcelWebdata(60,2));
+		csop.toSelectCountryFromDropDown(parcelWebdata(18,1));
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName(parcelWebdata(17,1));
+		csop.sendToName2and3Field();
+		csop.toSendStreetName(parcelWebdata(20,1));
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode(parcelWebdata(19,1));
+		csop.sentToPhoneAreaCode(parcelWebdata(21,1));
+		csop.sentToPhoneNumber(parcelWebdata(22,1));
+		csop.sentToEmailAddressCode(parcelWebdata(23,1));
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendTypeOfPackage(1, parcelWebdata(27,4));		
+		Thread.sleep(1000);
+		csop.clickOnFurtherPackageWithDataTransfer();	
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry(parcelWebdata(36,1));		
+		csop.clickOnDeliveryConditionsTab();
+		csop.setDeliveryConditions();
+		csop.sendBarcodeNumber(1);
+		csop.clickOnFurtherPackageWithDataTransfer();			
+		csop.sendBarcodeNumber(1);
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = {"National"})
+	public void createShipmentForRedemannNational_TC59961() throws InterruptedException, IOException, InvalidFormatException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login(parcelWebdata(0,2), parcelWebdata(1,2));
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier(parcelWebdata(61,1));
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown(parcelWebdata(9,1));
+		csop.fromSendPostalCode(parcelWebdata(10,1));
+		csop.fromSendLandPhoneAreaCode(parcelWebdata(11,1));
+		csop.fromSendLandPhoneNumber(parcelWebdata(12,1));
+		csop.fromSendMobileNumber(parcelWebdata(13,1));
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct(parcelWebdata(61,2));
+		csop.toSelectCountryFromDropDown(parcelWebdata(18,1));
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName(parcelWebdata(17,1));
+		csop.sendToName2and3Field();
+		csop.toSendStreetName(parcelWebdata(20,1));
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode(parcelWebdata(19,1));
+		csop.sentToPhoneAreaCode(parcelWebdata(21,1));
+		csop.sentToPhoneNumber(parcelWebdata(22,1));
+		csop.sentToEmailAddressCode(parcelWebdata(23,1));
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendTypeOfPackage(1, parcelWebdata(27,4));		
+		Thread.sleep(1000);
+		csop.clickOnFurtherPackageWithDataTransfer();	
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry(parcelWebdata(36,1));		
+		csop.clickOnDeliveryConditionsTab();
+		csop.setDeliveryConditions();
+		csop.sendBarcodeNumber(1);
+		csop.clickOnFurtherPackageWithDataTransfer();			
+		csop.sendBarcodeNumber(1);
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = {"National"})
+	public void createShipmentForKNNational_TC59962() throws InterruptedException, IOException, InvalidFormatException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login(parcelWebdata(0,2), parcelWebdata(1,2));
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier(parcelWebdata(62,1));
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown(parcelWebdata(9,1));
+		csop.fromSendPostalCode(parcelWebdata(10,1));
+		csop.fromSendLandPhoneAreaCode(parcelWebdata(11,1));
+		csop.fromSendLandPhoneNumber(parcelWebdata(12,1));
+		csop.fromSendMobileNumber(parcelWebdata(13,1));
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct(parcelWebdata(62,2));
+		csop.toSelectCountryFromDropDown(parcelWebdata(18,1));
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName(parcelWebdata(17,1));
+		csop.sendToName2and3Field();
+		csop.toSendStreetName(parcelWebdata(20,1));
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode(parcelWebdata(19,1));
+		csop.sentToPhoneAreaCode(parcelWebdata(21,1));
+		csop.sentToPhoneNumber(parcelWebdata(22,1));
+		csop.sentToEmailAddressCode(parcelWebdata(23,1));
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendTypeOfPackage(1, parcelWebdata(27,4));		
+		Thread.sleep(1000);
+		csop.clickOnFurtherPackageWithDataTransfer();	
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry(parcelWebdata(36,1));		
+		csop.clickOnDeliveryConditionsTab();
+		csop.setDeliveryConditions();
+		csop.sendBarcodeNumber(1);
+		csop.clickOnFurtherPackageWithDataTransfer();			
+		csop.sendBarcodeNumber(1);
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = {"National"})
+	public void createShipmentForFedexNational_TC59963() throws InterruptedException, IOException, InvalidFormatException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login(parcelWebdata(0,2), parcelWebdata(1,2));
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier(parcelWebdata(63,1));
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown(parcelWebdata(9,1));
+		csop.fromSendPostalCode(parcelWebdata(10,1));
+		csop.fromSendLandPhoneAreaCode(parcelWebdata(11,1));
+		csop.fromSendLandPhoneNumber(parcelWebdata(12,1));
+		csop.fromSendMobileNumber(parcelWebdata(13,1));
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct(parcelWebdata(63,2));
+		csop.toSelectCountryFromDropDown(parcelWebdata(18,1));
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName(parcelWebdata(17,1));
+		csop.sendToName2and3Field();
+		csop.toSendStreetName(parcelWebdata(20,1));
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode(parcelWebdata(19,1));
+		csop.sentToPhoneAreaCode(parcelWebdata(21,1));
+		csop.sentToPhoneNumber(parcelWebdata(22,1));
+		csop.sentToEmailAddressCode(parcelWebdata(23,1));
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendTypeOfPackage(1, parcelWebdata(27,4));		
+		Thread.sleep(1000);
+		csop.clickOnFurtherPackageWithDataTransfer();	
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry(parcelWebdata(36,1));		
+		csop.clickOnDeliveryConditionsTab();
+		csop.setDeliveryConditions();		
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = {"National"})
+	public void createShipmentForLintherNational_TC59964() throws InterruptedException, IOException, InvalidFormatException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login(parcelWebdata(0,2), parcelWebdata(1,2));
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier(parcelWebdata(64,1));
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown(parcelWebdata(9,1));
+		csop.fromSendPostalCode(parcelWebdata(10,1));
+		csop.fromSendLandPhoneAreaCode(parcelWebdata(11,1));
+		csop.fromSendLandPhoneNumber(parcelWebdata(12,1));
+		csop.fromSendMobileNumber(parcelWebdata(13,1));
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct(parcelWebdata(64,2));
+		csop.toSelectCountryFromDropDown(parcelWebdata(18,1));
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName(parcelWebdata(17,1));
+		csop.sendToName2and3Field();
+		csop.toSendStreetName(parcelWebdata(20,1));
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode(parcelWebdata(19,1));
+		csop.sentToPhoneAreaCode(parcelWebdata(21,1));
+		csop.sentToPhoneNumber(parcelWebdata(22,1));
+		csop.sentToEmailAddressCode(parcelWebdata(23,1));
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendTypeOfPackage(1, parcelWebdata(27,4));		
+		Thread.sleep(1000);
+		csop.sendBarcodeNumber(1);
+		csop.clickOnFurtherPackageWithDataTransfer();	
+		csop.sendBarcodeNumber(1);
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry(parcelWebdata(36,1));		
+		csop.clickOnDeliveryConditionsTab();
+		csop.setDeliveryConditions();		
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = {"National"})
+	public void createShipmentForELBNational_TC59738() throws InterruptedException, IOException, InvalidFormatException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login(parcelWebdata(0,2), parcelWebdata(1,2));
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier(parcelWebdata(65,1));
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown(parcelWebdata(9,1));
+		csop.fromSendPostalCode(parcelWebdata(10,1));
+		csop.fromSendLandPhoneAreaCode(parcelWebdata(11,1));
+		csop.fromSendLandPhoneNumber(parcelWebdata(12,1));
+		csop.fromSendMobileNumber(parcelWebdata(13,1));
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct(parcelWebdata(65,2));
+		csop.toSelectCountryFromDropDown(parcelWebdata(18,1));
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName(parcelWebdata(17,1));
+		csop.sendToName2and3Field();
+		csop.toSendStreetName(parcelWebdata(20,1));
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode(parcelWebdata(19,1));
+		csop.sentToPhoneAreaCode(parcelWebdata(21,1));
+		csop.sentToPhoneNumber(parcelWebdata(22,1));
+		csop.sentToEmailAddressCode(parcelWebdata(23,1));
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendTypeOfPackage(1, parcelWebdata(27,4));		
+		Thread.sleep(1000);	
+		csop.clickOnFurtherPackageWithDataTransfer();		
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry(parcelWebdata(36,1));			
+		csop.elbPickupDateAndTime();		
+		csop.clickOnDeliveryConditionsTab();
+		csop.setDeliveryConditions();	
+	//	csop.clickOnFurtherPackageWithDataTransfer();
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = {"National"})
+	public void createShipmentForDachserNational_TC59739() throws InterruptedException, IOException, InvalidFormatException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login(parcelWebdata(0,2), parcelWebdata(1,2));
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier(parcelWebdata(66,1));
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown(parcelWebdata(9,1));
+		csop.fromSendPostalCode(parcelWebdata(10,1));
+		csop.fromSendLandPhoneAreaCode(parcelWebdata(11,1));
+		csop.fromSendLandPhoneNumber(parcelWebdata(12,1));
+		csop.fromSendMobileNumber(parcelWebdata(13,1));
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct(parcelWebdata(66,2));
+		csop.toSelectCountryFromDropDown(parcelWebdata(18,1));
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName(parcelWebdata(17,1));
+		csop.sendToName2and3Field();
+		csop.toSendStreetName(parcelWebdata(20,1));
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode(parcelWebdata(19,1));
+		csop.sentToPhoneAreaCode(parcelWebdata(21,1));
+		csop.sentToPhoneNumber(parcelWebdata(22,1));
+		csop.sentToEmailAddressCode(parcelWebdata(23,1));
+		csop.sendPackageMeasurements();
+		
+		csop.sendPackageReferanceCode();
+		
+		csop.clickOnArtikelAddButton();		
+		csop.sendArtikelDescriptionByLimit(2);		
+		csop.sendTypeOfPackage(1, parcelWebdata(27,4));	
+	
+		Thread.sleep(1000);			
+		csop.clickOnFurtherPackageWithDataTransfer();	
+		
+		
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry(parcelWebdata(36,1));	
+		csop.sendDacherPickUpFromTime();
+		csop.sendDacherPickUpToTime();
+		csop.clickOnDeliveryConditionsTab();
+		csop.setDeliveryConditions();		
+		csop.clickOnPrintButton();
+		Thread.sleep(1000);		
+		String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+		Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
+	}
+	@Test (groups = {"Test","National"})
+	public void createShipmentForUPSOauthNational_TC60103() throws InterruptedException, IOException, InvalidFormatException {
+		lp = new LogInPage(driver);
+		hp = new HomePage(driver);
+		csop = new CreatShipmentOrderPage(driver);
+		sovp = new ShipmentOverViewPage(driver);
+		lp.login(parcelWebdata(0,2), parcelWebdata(1,2));
+		Thread.sleep(2000);
+		hp.changeLanguageAsEnglish();
+		hp.clickOnShippingDrop();
+		hp.clickOnCreateShipmentInShippingDrop();
+		csop.selectCarrier(parcelWebdata(67,1));
+		csop.fromSendPersonName(parcelWebdata(4,1));
+		csop.fromSendCompanyName(parcelWebdata(5,1));
+		csop.fromSendOnName3Field(parcelWebdata(6,1));
+		csop.fronSendOnStreetNameField(parcelWebdata(7,1));
+		csop.fromSendOnhouseNumberField(parcelWebdata(8,1));
+		csop.fromSelectCountryFromDropDown(parcelWebdata(9,1));
+		csop.fromSendPostalCode(parcelWebdata(10,1));
+		csop.fromSendLandPhoneAreaCode(parcelWebdata(11,1));
+		csop.fromSendLandPhoneNumber(parcelWebdata(12,1));
+		csop.fromSendMobileNumber(parcelWebdata(13,1));
+		Thread.sleep(1000);
+		csop.sendShipmentReferanceNumber();
+		Thread.sleep(1000);
+		csop.sendDeliveryNoteNumber();
+		Thread.sleep(1000);
+		csop.selectCarrierProduct(parcelWebdata(67,2));
+		csop.toSelectCountryFromDropDown(parcelWebdata(18,1));
+		csop.toSendPersonName(parcelWebdata(16,1));
+		csop.toSendCompanyName(parcelWebdata(17,1));
+		csop.sendToName2and3Field();
+		csop.toSendStreetName(parcelWebdata(20,1));
+		csop.toSendHouseNumber();
+		csop.toSendPostalCode(parcelWebdata(19,1));
+		csop.sentToPhoneAreaCode(parcelWebdata(21,1));
+		csop.sentToPhoneNumber(parcelWebdata(22,1));
+		csop.sentToEmailAddressCode(parcelWebdata(23,1));
+		csop.sendPackageMeasurements();
+		csop.clickOnArtikelAddButton();
+		csop.sendArtikelDescriptionByLimit(2);
+		csop.sendTypeOfPackage(1, parcelWebdata(27,4));		
+		Thread.sleep(1000);			
+		csop.clickOnFurtherPackageWithDataTransfer();	
+		csop.sendPackageContent(1, parcelWebdata(29,4));
+		csop.sendPackageContent(2, parcelWebdata(29,4));
+		csop.clickOnEditPickUpButton();
+		csop.sendPickUpAddress();
+		csop.selectPickUpCountry(parcelWebdata(36,1));	
+		csop.sendDacherPickUpFromTime();
+		csop.sendDacherPickUpToTime();
+		csop.clickOnDeliveryConditionsTab();
+		csop.setDeliveryConditions();		
+	//	csop.clickOnPrintButton();
+	//	Thread.sleep(1000);		
+	//	String actual = sovp.checkPrintingStatusUsingShipmntCustmRfnceNum(csop.getShipmentReferanceNumber());
+	//	Assert.assertEquals(actual, "Printed", "Shipment status not as expected");
 	}
 }

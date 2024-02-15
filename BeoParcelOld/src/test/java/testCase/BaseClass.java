@@ -18,6 +18,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import utilities.ExcelUtilities;
+import utilities.ExtenetReport;
 import utilities.ScreenShotCapture;
 
 public class BaseClass {
@@ -32,9 +33,16 @@ public class BaseClass {
 	}
 
 	public static String logIndata(int usr) throws IOException, InvalidFormatException {
-		ArrayList<String> data = ExcelUtilities.readDataFromExcel(Constant.ExcelFileLocation,
+		ArrayList<String> data = ExcelUtilities.readDataFromExcelArrayList(Constant.ExcelFileLocation,
 				Constant.ExcelLogInSheetName);
 		return data.get(usr);
+	}
+
+	public static String parcelWebdata(int row, int column) throws IOException, InvalidFormatException {
+		String data = ExcelUtilities.readDataFromExcelParcelRowColumn(row, column, Constant.ExcelFileLocation,
+				Constant.ExcelLogInSheetName);
+
+		return data;
 	}
 
 	@BeforeMethod(alwaysRun = true)
@@ -55,11 +63,15 @@ public class BaseClass {
 		} else if (browserName.equals("fireFox")) {
 			testBasic();
 			WebDriverManager.firefoxdriver().setup();
+			// "C:\Users\akhil.sathyan\eclipse-workspace\BeoParcel\src\main\resources\Driver\geckodriver.exe"
+			// System.setProperty(pro.getProperty("fireFoxDriver"),
+			// System.getProperty("user.dir") + Constant.FireFoxDriverFileLocation);
 			driver = new FirefoxDriver();
 		}
 		driver.manage().window().maximize();
 		driver.get(pro.getProperty("BaseURL"));
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
 	}
 
 	@AfterMethod(alwaysRun = true)
@@ -67,7 +79,8 @@ public class BaseClass {
 		if (iTestResult.getStatus() == ITestResult.FAILURE) {
 			sc = new ScreenShotCapture();
 			sc.captureFailureScreenShot(driver, iTestResult.getName());
+
 		}
-		driver.quit();
+		//driver.quit();
 	}
 }

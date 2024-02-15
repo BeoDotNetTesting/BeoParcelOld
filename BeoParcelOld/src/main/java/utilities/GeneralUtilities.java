@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -48,7 +50,8 @@ public class GeneralUtilities {
 		Select object = new Select(element);
 		object.selectByVisibleText(text);
 		WebElement selectedElement = object.getFirstSelectedOption();
-		 selectedElement.click();;
+		selectedElement.click();
+		;
 	}
 
 	public boolean elementIsSelected(WebElement element) {
@@ -115,20 +118,23 @@ public class GeneralUtilities {
 		je.executeScript("arguments[0].scrollIntoView(true);", elements.get(index));
 	}
 
-	public void sendValueUsingJavaScript(WebDriver driver,WebElement element,String value) {
+	public void sendValueUsingJavaScript(WebDriver driver, WebElement element, String value) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].value = '"+value+"'", element);
+		js.executeScript("arguments[0].value = '" + value + "'", element);
 	}
-	public void blurThePlaceHolder(WebDriver driver,WebElement element) {
+
+	public void blurThePlaceHolder(WebDriver driver, WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].blur()", element);
 	}
-	public void sendValueUsingJavaScriptAndBlur(WebDriver driver,WebElement element,String value) {
+
+	public void sendValueUsingJavaScriptAndBlur(WebDriver driver, WebElement element, String value) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].value = '"+value+"'", element);
+		js.executeScript("arguments[0].value = '" + value + "'", element);
 		JavascriptExecutor js1 = (JavascriptExecutor) driver;
 		js1.executeScript("arguments[0].blur()", element);
 	}
+
 	public String getCSSValueOfElement(WebElement element, String parameter) {
 		return element.getCssValue(parameter);
 	}
@@ -221,30 +227,59 @@ public class GeneralUtilities {
 		return formatter.format(date);
 	}
 
+	public String generateCurrentDate() {
+		LocalDate currentDate = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+		// Format the date using the defined formatter
+		String formattedDate = currentDate.format(formatter);
+		return formattedDate;
+	}
+
+	public String generateNextDay() {
+		int nextday = 1;
+		Date date = new Date();
+		SimpleDateFormat todayDate = new SimpleDateFormat("dd");
+		String dateToday = todayDate.format(date);
+
+		int toDay = Integer.parseInt(dateToday);
+		if (toDay > 30) {
+			nextday = 1;
+		} else if (toDay < 30) {
+			nextday = toDay + 1;
+		}
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+		return formatter.format(date + "-" + nextday);
+	}
+
 	public void copyReport(String from, String to) throws InterruptedException, IOException {
 		File dirFrom = new File(from);
 		File dirTo = new File(to);
 		Thread.sleep(5000);
 		Files.copy(dirFrom.toPath(), dirTo.toPath());
 	}
-	public boolean checkAttributePresentOrNot(WebElement element,String attributeName) {
-		boolean attributeStatus=false;
-		if(element.getAttribute(attributeName) != null) {
-			attributeStatus=true;
+
+	public boolean checkAttributePresentOrNot(WebElement element, String attributeName) {
+		boolean attributeStatus = false;
+		if (element.getAttribute(attributeName) != null) {
+			attributeStatus = true;
 		}
 		return attributeStatus;
 	}
+
 	public boolean checkAWordPresentInScentence(String substringToCheck, String sentence) {
-		boolean status= false;
-		  if (sentence.contains(substringToCheck)) {
-	           status=true;
-	        } else {
-	        	status=false;
-	        }
-		  return status;
-	    }
+		boolean status = false;
+		if (sentence.contains(substringToCheck)) {
+			status = true;
+		} else {
+			status = false;
+		}
+		return status;
+	}
+
 	public void scrollElementIntoView(WebDriver driver, WebElement element) {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
-    }
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
 }

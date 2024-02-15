@@ -11,5 +11,5 @@
 			<class name="testCase.CreatShipmentOrderPageTest"></class>
 			<class name="testCase.ShipmentOverViewPageTest"></class>
 		</classes>
-	</test>
+	</test>	
 </suite>

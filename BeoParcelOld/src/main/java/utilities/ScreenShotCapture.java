@@ -2,6 +2,7 @@ package utilities;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,6 +11,9 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.io.FileHandler;
 public class ScreenShotCapture {
+	//File finalDestination;
+	String absolutePath;
+	 Path path;
 	public void captureFailureScreenShot(WebDriver driver, String name) throws IOException {
 		
 		TakesScreenshot scrShot = (TakesScreenshot) driver;
@@ -23,9 +27,14 @@ public class ScreenShotCapture {
 		String timeStamp = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss").format(new Date());// date time capture using
 																							// java
 
-		File finalDestination = new File(
-				System.getProperty("user.dir") + "\\OutputScreenshots\\" + name + "_" + timeStamp + ".png");
+	//	File finalDestination = new File(System.getProperty("user.dir") + "\\OutputScreenshots\\" + name + "_" + timeStamp + ".png");
+		File finalDestination = new File(System.getProperty("user.dir") + "\\OutputScreenshots\\" + name +  ".png");
 		FileHandler.copy(screenShot, finalDestination);
-
+		//return finalDestination;
+		   path = finalDestination.toPath();
+		absolutePath = finalDestination.getAbsolutePath();
+	}
+	public Path getScreenshotCapturePath() {
+		return path;
 	}
 }

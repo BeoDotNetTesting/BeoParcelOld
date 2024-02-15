@@ -24,7 +24,7 @@ public class ExcelUtilities {
 	public static HSSFSheet shh;
 	public static FileInputStream f;
 
-	public static ArrayList<String> readDataFromExcel(String filePath, String sheetName)
+	public static ArrayList<String> readDataFromExcelArrayList(String filePath, String sheetName)
 			throws IOException, InvalidFormatException {
 		String path = System.getProperty("user.dir") + filePath;
 		ArrayList<String> excelRows = new ArrayList<String>();
@@ -45,10 +45,20 @@ public class ExcelUtilities {
 		}
 		return excelRows;
 	}
-
-	public String readDataFromExcelExportkontrol(int cellNumber, String sheetName)
+	public  static String readDataFromExcelParcelRowColumn(int row, int column,String filePath, String sheetName) throws IOException {
+		f = new FileInputStream(System.getProperty("user.dir") + filePath);
+		wbh = new HSSFWorkbook(f);
+		shh = wbh.getSheet(sheetName);
+		DataFormatter formatter = new DataFormatter();
+		Row r = shh.getRow(row);
+		Cell c = r.getCell(column);
+		String value=formatter.formatCellValue(c);
+		//return c.getStringCellValue();
+		return value;
+	}
+	public static String readDataFromExcelParcel(int cellNumber, String sheetName)
 			throws IOException, InvalidFormatException {
-		String path = System.getProperty("user.dir") + "\\src\\main\\resources\\Excel\\Exportkontrol.xls";
+		String path = System.getProperty("user.dir") + "\\src\\main\\resources\\Excel\\ParcelTest.xls";
 		ArrayList<String> excelRows = new ArrayList<String>();
 		f = new FileInputStream(path);
 		wbh = new HSSFWorkbook(f);
@@ -64,14 +74,7 @@ public class ExcelUtilities {
 		return excelRows.get(cellNumber);
 	}
 
-	public static String readDataFromExcel(int row, int column, String sheetName) throws IOException {
-		f = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\resources\\Exportkontrol.xlsx");
-		wb = new XSSFWorkbook(f);
-		sh = wb.getSheet(sheetName);
-		Row r = sh.getRow(row);
-		Cell c = r.getCell(column);
-		return c.getStringCellValue();
-	}
+	
 
 	public static ArrayList<String> readDataFromExcelNew(String filePath, String sheetName)
 			throws IOException, InvalidFormatException {
