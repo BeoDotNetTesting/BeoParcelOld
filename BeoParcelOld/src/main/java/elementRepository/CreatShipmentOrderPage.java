@@ -112,8 +112,10 @@ public class CreatShipmentOrderPage {
 	WebElement removeArticle;
 	@FindBy(id = "txtGocontents_1")
 	WebElement additionalInfoPackageTypeContent;
-	@FindBy(id="txtpkgRef_1")
+	@FindBy(id = "txtpkgRef_1")
 	WebElement packageReferanceNumber;
+	@FindBy(id = "txtPalletPlaces_1")
+	WebElement palletPlacesField;
 	// PickUp
 
 	@FindBy(id = "txtPickZipCodeCountry_1")
@@ -146,14 +148,14 @@ public class CreatShipmentOrderPage {
 	WebElement pickUpFromTime;
 	@FindBy(id = "txtPickTo_1")
 	WebElement pickUpToTime;
-	@FindBy(id="lblPickupFromTime_1")
+	@FindBy(id = "lblPickupFromTime_1")
 	WebElement pickUpFromTimeLabel;
-	@FindBy(id="lblPickupDate_1")
+	@FindBy(id = "lblPickupDate_1")
 	WebElement pickUpDateLabel;
-	@FindBy(id="txtPickupFromTime_1")
-	WebElement pickUpFromTimeDBS;
-	@FindBy(id="txtPickupToTime_1")
-	WebElement pickUpToTimeDBS;
+	@FindBy(id = "txtPickupFromTime_1")
+	WebElement pickUpFromTimeOne;
+	@FindBy(id = "txtPickupToTime_1")
+	WebElement pickUpToTimeOne;
 	// Invoice Recipient
 	@FindBy(id = "tabShipToParty")
 	WebElement invoiceRecipientTab;
@@ -179,9 +181,9 @@ public class CreatShipmentOrderPage {
 	WebElement invoiceRecipientMobilePhone;
 	@FindBy(id = "txtCustomerEmail_1")
 	WebElement invoiceRecipientEmail;
-	@FindBy(id="txtDascherPickupFromTime_1")
+	@FindBy(id = "txtDascherPickupFromTime_1")
 	WebElement dacherPickUpFromTime;
-	@FindBy(id="txtDascherPickupToTime_1")
+	@FindBy(id = "txtDascherPickupToTime_1")
 	WebElement dacherPickUpToTime;
 
 	// Delivery Conditions
@@ -199,20 +201,21 @@ public class CreatShipmentOrderPage {
 	WebElement incotermLocationField;
 
 	// ELB
-	@FindBy(id="txtELBPickDate_1")
+	@FindBy(id = "txtELBPickDate_1")
 	WebElement elbPickUpDate;
-	@FindBy(id="txtELBPickFrom_1")
+	@FindBy(id = "txtELBPickFrom_1")
 	WebElement elbPickFromTime;
-	@FindBy(id="txtELBPickTo_1")
+	@FindBy(id = "txtELBPickTo_1")
 	WebElement elbPickUpToTime;
-	@FindBy(id="txtELBdeliveryDate_1")
+	@FindBy(id = "txtELBdeliveryDate_1")
 	WebElement elbDeliveryDate;
-	@FindBy(id="txtELBDeliveryFromTime_1")
+	@FindBy(id = "txtELBDeliveryFromTime_1")
 	WebElement elbDeliveryFromTime;
-	@FindBy(id="txtELBDeliveryToTime_1")
+	@FindBy(id = "txtELBDeliveryToTime_1")
 	WebElement elbDeliveryToTime;
+
 	// ELB pickup condition
-	public void elbPickupDateAndTime() {	
+	public void elbPickupDateAndTime() {
 		elbPickUpDate.clear();
 		elbPickUpDate.sendKeys(gu.generateCurrentDate());
 		elbPickFromTime.sendKeys("08:00");
@@ -223,7 +226,7 @@ public class CreatShipmentOrderPage {
 		elbDeliveryToTime.sendKeys("20:00");
 	}
 	// Delivery Conditions
-	
+
 	public void clickOnDeliveryConditionsTab() {
 		deliveryConditionsTab.click();
 	}
@@ -232,15 +235,24 @@ public class CreatShipmentOrderPage {
 		gu.selectDropdownWithVisibleText(frankaturCarrierDropDown, "DAP: Delivered At Place");
 	}
 
-	public void setDeliveryConditions() throws InvalidFormatException, IOException {
+	public void setDeliveryConditions() throws InvalidFormatException, IOException, InterruptedException {
 		gu.sendValueUsingJavaScriptAndBlur(driver, deliveryConditionField, parcelWebdata(38, 1).trim());
 		gu.sendValueUsingJavaScriptAndBlur(driver, frankaturDescriptionField, parcelWebdata(39, 1).trim());
 		gu.selectDropdownWithIndex(incotermDropDown, 2);
-		gu.sendValueUsingJavaScriptAndBlur(driver, incotermLocationField, parcelWebdata(41, 1).trim());
-		incotermLocationField.clear();
-		//gu.sendValueUsingJavaScriptAndBlur(driver, incotermLocationField, parcelWebdata(41, 1).trim());
-	//	gu.selectDropdownWithVisibleText(frankaturCarrierDropDown, parcelWebdata(42, 1).trim());
 		gu.selectDropdownWithIndex(frankaturCarrierDropDown, 2);
+		gu.sendValueUsingJavaScriptAndBlur(driver, incotermLocationField, parcelWebdata(41, 1).trim());
+
+		// gu.sendValueUsingActionClass(driver, parcelWebdata(41, 1),
+		// incotermLocationField);
+
+		// incotermLocationField.sendKeys(parcelWebdata(41, 1));
+		// gu.sendValueUsingJavaScript(driver, incotermLocationField, parcelWebdata(41,
+		// 1));
+		// gu.sendValueUsingJavaScriptAndBlur(driver, incotermLocationField,
+		// parcelWebdata(41, 1).trim());
+		// gu.selectDropdownWithVisibleText(frankaturCarrierDropDown, parcelWebdata(42,
+		// 1).trim());
+
 	}
 
 	// Invoice Recipient
@@ -263,26 +275,32 @@ public class CreatShipmentOrderPage {
 	}
 
 	// pickUp
-public void sendDacherPickUpFromTime() {
-	dacherPickUpFromTime.click();
-	dacherPickUpFromTime.sendKeys("08:00");
-}
-public void sendDacherPickUpToTime() {
-	dacherPickUpToTime.click();
-	dacherPickUpToTime.sendKeys("20:00");
-}
+	public void sendDacherPickUpFromTime() {
+		dacherPickUpFromTime.click();
+		dacherPickUpFromTime.sendKeys("08:00");
+	}
+
+	public void sendDacherPickUpToTime() {
+		dacherPickUpToTime.click();
+		dacherPickUpToTime.sendKeys("20:00");
+	}
+
 	public void sendPickUpFromTime() {
-		pickUpFromTime.click();		
-		pickUpFromTime.sendKeys("08:00");		
+		pickUpFromTime.click();
+		pickUpFromTime.sendKeys("08:00");
 	}
-	public void sendPickUpFromTimeDBS() {
-		pickUpFromTimeDBS.click();		
-		pickUpFromTimeDBS.sendKeys("08:00");		
+
+	public void sendPickUpFromTimeOne() {
+		pickUpFromTimeOne.click();
+		pickUpFromTimeOne.sendKeys(gu.generateTimeAfterAnHour());
+
 	}
-	public void sendPickUpToTimeDBS() {
-		pickUpToTimeDBS.click();		
-		pickUpToTimeDBS.sendKeys("20:00");		
+
+	public void sendPickUpToTimeOne() {
+		pickUpToTimeOne.click();
+		pickUpToTimeOne.sendKeys("20:00");
 	}
+
 	public void sendPickUpToTime() {
 		pickUpToTime.sendKeys("20:00");
 	}
@@ -323,7 +341,7 @@ public void sendDacherPickUpToTime() {
 		gu.sendValueUsingJavaScriptAndBlur(driver, pickUpHouseNumber, parcelWebdata(32, 1).trim());
 		gu.sendValueUsingJavaScriptAndBlur(driver, pickUpName2, parcelWebdata(33, 1).trim());
 		gu.sendValueUsingJavaScriptAndBlur(driver, pickUpName3, parcelWebdata(34, 1).trim());
-		gu.sendValueUsingJavaScriptAndBlur(driver, pickUpStreetName1, parcelWebdata(35, 1).trim());		
+		gu.sendValueUsingJavaScriptAndBlur(driver, pickUpStreetName1, parcelWebdata(35, 1).trim());
 		gu.sendValueUsingJavaScriptAndBlur(driver, pickUpStreetName1, parcelWebdata(35, 1).trim());
 	}
 
@@ -544,27 +562,33 @@ public void sendDacherPickUpToTime() {
 		WebElement element = driver.findElement(By.id(elementId));
 		element.sendKeys(packageType);
 	}
-	public void sendCargoDescription (int packageNumber, String cargoDescription ) {
+
+	public void sendCargoDescription(int packageNumber, String cargoDescription) {
 		String elementId = "txtCargoDes_" + packageNumber;
 		WebElement element = driver.findElement(By.id(elementId));
 		element.sendKeys(cargoDescription);
 	}
-	public void sendBarcodeNumber (int packageNumber ) {
+
+	public void sendBarcodeNumber(int packageNumber) {
 		String elementId = "txtBarcodeNumber_" + packageNumber;
 		WebElement element = driver.findElement(By.id(elementId));
 		element.clear();
-		gu.sendValueUsingJavaScriptAndBlur(driver, element, gu.generateCurrentDateAndTime());		
+		gu.sendValueUsingJavaScriptAndBlur(driver, element, gu.generateCurrentDateAndTime());
 	}
+
 	public void sendPackageDescription(int packageNumber, String packageDescription) {
 		String elementId = "txtpkgRef_" + packageNumber;
 		WebElement element = driver.findElement(By.id(elementId));
 		element.sendKeys(packageDescription);
 	}
+
 	public void sendPackageContent(int packageNumber, String packageContent) {
 		String elementId = "txtPackageContent_" + packageNumber;
 		WebElement element = driver.findElement(By.id(elementId));
-		element.sendKeys(packageContent);
+		element.clear();
+		gu.sendValueUsingJavaScriptAndBlur(driver, element, packageContent);		
 	}
+
 	public void sendPackageMeasurementUsingCount() {
 		for (int i = 0; i < noOfPackageList.size(); i++) {
 			String weight = (gu.randon(2) + 1) + "";
@@ -617,13 +641,13 @@ public void sendDacherPickUpToTime() {
 	public void sendArtikelDescriptionByLimit(int i) {
 
 		for (int count = 0; count < i; count++) {
-			
+
 			String artikelNumberPath = "//input[@id='txtArticleArtrNumber_1_" + (count + 1) + "']";
 			WebElement artikelNumberElement = driver.findElement(By.xpath(artikelNumberPath));
-			artikelNumberElement.sendKeys("ARTNO"+gu.randon(1000));
+			artikelNumberElement.sendKeys("ARTNO" + gu.randon(1000));
 			String artikelPositionPath = "//input[@id='txtArticlePosition_1_" + (count + 1) + "']";
 			WebElement artikelPositionElement = driver.findElement(By.xpath(artikelPositionPath));
-			artikelPositionElement.sendKeys((count + 1)+"");
+			artikelPositionElement.sendKeys((count + 1) + "");
 			String artikelDescriptionPath = "//input[@id='txtArticleArtDesc_1_" + (count + 1) + "']";
 			WebElement artikelDescriptionElement = driver.findElement(By.xpath(artikelDescriptionPath));
 			artikelDescriptionElement.sendKeys("Wood");
@@ -645,9 +669,6 @@ public void sendDacherPickUpToTime() {
 			WebElement artikelAddRowElement = driver.findElement(By.xpath(artikelAddRowPath));
 			artikelAddRowElement.click();
 
-			
-			
-			
 		}
 	}
 
@@ -674,9 +695,13 @@ public void sendDacherPickUpToTime() {
 		gu.blurThePlaceHolder(driver, deliveryNoteNumberField);
 	}
 
+	public void sendPalletPlaces() {
+		palletPlacesField.sendKeys("1234");
+	}
+
 	public void clickOnFurtherPackageWithDataTransfer() {
 		gu.clickJavaScriptExecutor(furtherPackageAddButton, driver);
-		//furtherPackageAddButton.click();
+		// furtherPackageAddButton.click();
 	}
 
 	public void removeAnArticle() {
@@ -727,14 +752,16 @@ public void sendDacherPickUpToTime() {
 		WebElement referanceCodeElement = driver.findElement(By.id(referanceCodeElementId));
 		referanceCodeElement.sendKeys("RC" + gu.generateCurrentDateAndTime());
 	}
-	public void sendPackageReferanceCode() {		
+
+	public void sendPackageReferanceCode() {
 		packageReferanceNumber.clear();
 		packageReferanceNumber.click();
-		
+
 //	gu.sendValueUsingJavaScriptAndBlur(driver, packageReferanceNumber,  "Code");
-	gu.sendValueUsingJavaScript(driver, packageReferanceNumber, "1234");
-	
+		gu.sendValueUsingJavaScript(driver, packageReferanceNumber, "1234");
+
 	}
+
 	public void sendTwoStagePackingItemsCount(int i) {
 		String itemsCountElementId = "txtPltTntItemCount_" + i;
 		WebElement itemsCountElement = driver.findElement(By.id(itemsCountElementId));

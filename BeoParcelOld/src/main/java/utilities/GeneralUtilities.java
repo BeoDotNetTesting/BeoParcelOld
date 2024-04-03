@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -135,6 +136,15 @@ public class GeneralUtilities {
 		js1.executeScript("arguments[0].blur()", element);
 	}
 
+	public void sendValueUsingActionClass(WebDriver driver, String text, WebElement element) {
+		Actions actions = new Actions(driver);
+		for (char letter : text.toCharArray()) {
+			actions.sendKeys(element, String.valueOf(letter));
+			actions.pause(Duration.ofMillis(500));
+		}
+		actions.build().perform();
+	}
+
 	public String getCSSValueOfElement(WebElement element, String parameter) {
 		return element.getCssValue(parameter);
 	}
@@ -229,11 +239,27 @@ public class GeneralUtilities {
 
 	public String generateCurrentDate() {
 		LocalDate currentDate = LocalDate.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-
-		// Format the date using the defined formatter
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");	
 		String formattedDate = currentDate.format(formatter);
 		return formattedDate;
+	}
+
+	public String generateTimeAfterAnHour() {
+		String time="";
+		LocalTime currentTime = LocalTime.now();
+		DateTimeFormatter formatterHour = DateTimeFormatter.ofPattern("HH");
+		String formattedHour= currentTime.format(formatterHour);
+		int hh = Integer.parseInt(formattedHour);
+		DateTimeFormatter formatterMinute = DateTimeFormatter.ofPattern("mm");
+		String formattedMinute = currentTime.format(formatterMinute);
+		int mm = Integer.parseInt(formattedMinute);
+		if(hh==23) {
+			hh=1;
+			time="01:"+mm;
+		}else {
+			time=(hh+1)+":"+mm;
+		}
+		return time;
 	}
 
 	public String generateNextDay() {

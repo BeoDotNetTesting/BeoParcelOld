@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 public class Retry implements IRetryAnalyzer {
 
 	private static final Logger LOG = LogManager.getLogger("Retry.class"); // .getLogger ("Retry.class");
-	private static final int maxTry = 3;
+	private static final int maxTry = 1;
 	private int count = 0;
 
 	@Override

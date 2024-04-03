@@ -17,7 +17,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 public class ExtenetReport implements ITestListener {
 	ExtentSparkReporter sparkReporter;
 	ExtentReports reports;
-	ExtentTest test;	
+	ExtentTest test;
 
 	public void configureReport() {
 		Date date = new Date();
@@ -42,10 +42,6 @@ public class ExtenetReport implements ITestListener {
 		sparkReporter.config().setTheme(Theme.STANDARD);
 	}
 
-	public void onTestStart(ITestResult result) {
-
-	}
-
 	public void onTestSuccess(ITestResult result) {
 		test = reports.createTest(result.getName());
 		test.log(Status.PASS,
@@ -61,41 +57,22 @@ public class ExtenetReport implements ITestListener {
 			String failureReason = result.getThrowable().getMessage();
 			test.log(Status.FAIL, "Failure Reason: " + failureReason);
 			test.fail(result.getThrowable());
-			 test.addScreenCaptureFromPath( System.getProperty("user.dir") + "\\OutputScreenshots\\" + result.getName() +  ".png");
-			}
-		//test.addScreenCaptureFromPath(absolutePath);
-	}
-
-	public void onTestSkipped(ITestResult result) {
-		test = reports.createTest(result.getName());
-		test.log(Status.SKIP,
-				MarkupHelper.createLabel("Name of the skipped test case is : " + result.getName(), ExtentColor.YELLOW));
-		if (result.getStatus() == ITestResult.SKIP) {
-			test.skip("Test skipped");
-			String skipReason = result.getThrowable().getMessage();
-			test.log(Status.SKIP, "Skip Reason: " + skipReason);
-			test.skip(result.getThrowable());
+			test.addScreenCaptureFromPath(
+					System.getProperty("user.dir") + "\\OutputScreenshots\\" + result.getName() + ".png");
 		}
 	}
 
-	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-		test = reports.createTest(result.getName());
-		test.log(Status.FAIL,
-				MarkupHelper.createLabel("Name of the Failed Test Case is : " + result.getName(), ExtentColor.GREY));
-	}
-
-	public void onTestFailedWithTimeout(ITestResult result) {
+	public void onTestSkipped(ITestResult result) {
 
 	}
 
 	public void onStart(ITestContext context) {
 		configureReport();
-		// Delete the testoutput folder before the suite starts
 		File testOutputFolder = new File("target/testoutput");
 		if (testOutputFolder.exists()) {
 			deleteFolder(testOutputFolder);
 		}
-		File screenshotOutputFolder = new File("C:\\Users\\akhil.sathyan\\git\\BeoParcelOld\\BeoParcelOld\\OutputScreenshots");
+		File screenshotOutputFolder = new File(System.getProperty("user.dir") + "\\OutputScreenshots");
 		if (screenshotOutputFolder.exists()) {
 			deleteFolder(screenshotOutputFolder);
 		}
@@ -106,7 +83,7 @@ public class ExtenetReport implements ITestListener {
 		if (files != null) {
 			for (File file : files) {
 				if (file.isDirectory()) {
-					deleteFolder(file); 
+					deleteFolder(file);
 				} else {
 					file.delete();
 				}
@@ -115,7 +92,7 @@ public class ExtenetReport implements ITestListener {
 		folder.delete();
 	}
 
-	public void onFinish(ITestContext context) {		
+	public void onFinish(ITestContext context) {
 		reports.flush();
 	}
 }

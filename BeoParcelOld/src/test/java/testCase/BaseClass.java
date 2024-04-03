@@ -41,7 +41,6 @@ public class BaseClass {
 	public static String parcelWebdata(int row, int column) throws IOException, InvalidFormatException {
 		String data = ExcelUtilities.readDataFromExcelParcelRowColumn(row, column, Constant.ExcelFileLocation,
 				Constant.ExcelLogInSheetName);
-
 		return data;
 	}
 
@@ -49,29 +48,16 @@ public class BaseClass {
 	@Parameters("browser")
 	public void beforeMethod(String browserName) throws IOException {
 		if (browserName.equals("chrome")) {
-			testBasic();
-			System.setProperty(pro.getProperty("chromeDriver"),
-					System.getProperty("user.dir") + Constant.ChromeDriverFileLocation);
-
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--remote-allow-origins=*");
-			DesiredCapabilities cp = new DesiredCapabilities();
-			cp.setCapability(ChromeOptions.CAPABILITY, options);
-			options.merge(cp);
-			driver = new ChromeDriver(options);
+			testBasic();			
+			driver = new ChromeDriver();
 
 		} else if (browserName.equals("fireFox")) {
-			testBasic();
-			WebDriverManager.firefoxdriver().setup();
-			// "C:\Users\akhil.sathyan\eclipse-workspace\BeoParcel\src\main\resources\Driver\geckodriver.exe"
-			// System.setProperty(pro.getProperty("fireFoxDriver"),
-			// System.getProperty("user.dir") + Constant.FireFoxDriverFileLocation);
+			testBasic();		
 			driver = new FirefoxDriver();
 		}
 		driver.manage().window().maximize();
 		driver.get(pro.getProperty("BaseURL"));
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-
 	}
 
 	@AfterMethod(alwaysRun = true)
@@ -79,8 +65,7 @@ public class BaseClass {
 		if (iTestResult.getStatus() == ITestResult.FAILURE) {
 			sc = new ScreenShotCapture();
 			sc.captureFailureScreenShot(driver, iTestResult.getName());
-
 		}
-		//driver.quit();
+	driver.quit();
 	}
 }
