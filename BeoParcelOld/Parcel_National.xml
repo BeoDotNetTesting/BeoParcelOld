@@ -1,0 +1,17 @@
+<suite name="BeoParcel" parallel="tests" thread-count="1">
+	<test name="ChromeTest">
+		<groups>
+			<run>				
+				<include name="National"></include>
+			</run>
+		</groups>
+		<listeners>	
+			<listener class-name="utilities.RetryListener" />
+			<listener class-name="utilities.ExtenetReport" />			
+		</listeners>		
+		<parameter name="browser" value="chrome"></parameter>
+		<classes>			
+				<class name="testCase.CreatShipmentOrderPageTest"></class>				
+		</classes>
+	</test>			
+</suite>
